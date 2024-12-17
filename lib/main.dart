@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_database/pages/login_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:supabase_database/pages/list_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +19,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: ListPage());
+    return const MaterialApp(home: LoginPage());
   }
 }

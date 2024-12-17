@@ -12,4 +12,8 @@ class Database {
     }
     return studentList;
   }
+
+  signup({required String email, required String password}) async {
+    await supabase.auth.signUp(password: password, email: email);
+  }
 }
