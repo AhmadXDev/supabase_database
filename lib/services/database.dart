@@ -3,6 +3,7 @@ import 'package:supabase_database/models/student.dart';
 
 class Database {
   final supabase = Supabase.instance.client;
+
   Future<List<Student>> getData() async {
     var response = await supabase.from("student").select();
 
@@ -13,7 +14,22 @@ class Database {
     return studentList;
   }
 
+  insertNewStudent(
+      {required String name, required int age, required double salary}) async {
+    await supabase.from("student").insert({
+      "name": name,
+      "age": age,
+      "salary": salary,
+    });
+  }
+
+  // ================================== For Authorization Table ==================================
+
   signup({required String email, required String password}) async {
     await supabase.auth.signUp(password: password, email: email);
+  }
+
+  login({required String email, required String password}) async {
+    await supabase.auth.signInWithPassword(email: email, password: password);
   }
 }

@@ -3,17 +3,17 @@ import 'package:supabase_database/constants/spacing.dart';
 import 'package:supabase_database/extensions/nav.dart';
 import 'package:supabase_database/logic/methods.dart';
 import 'package:supabase_database/pages/list_page.dart';
-import 'package:supabase_database/pages/signup_page.dart';
+import 'package:supabase_database/pages/login_page.dart';
 import 'package:supabase_database/widgets/text_input.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  SignupPageState createState() => SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class SignupPageState extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -27,43 +27,44 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade200,
+        backgroundColor: Colors.red.shade200,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             const Text(
-              "Login",
+              "Signup",
               style: TextStyle(fontSize: 24),
             ),
             height24,
             TextInput(
               controller: emailController,
               labelText: "enter email",
+              radiusCircular: 16.0,
             ),
             height24,
             TextInput(
               controller: passwordController,
               labelText: "enter password",
+              radiusCircular: 16.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("if you don't have an account"),
+                const Text("if you have already account"),
                 TextButton(
-                  onPressed: () {
-                    context.pushOut(const SignupPage());
-                  },
-                  child: const Text("signup"),
-                ),
+                    onPressed: () {
+                      context.pushOut(const LoginPage());
+                    },
+                    child: const Text("login")),
               ],
             ),
+            height24,
             ElevatedButton(
                 onPressed: () {
-                  loginToPage(
+                  signupToPage(
                     context,
                     emailController,
                     passwordController,
@@ -74,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   backgroundColor: const Color.fromARGB(255, 10, 67, 180),
                 ),
                 child: const Text(
-                  "Login",
+                  "Signup",
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ))
           ],
