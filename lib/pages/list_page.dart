@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_database/constants/spacing.dart';
+import 'package:supabase_database/models/student.dart';
 import 'package:supabase_database/services/database.dart';
 import 'package:supabase_database/widgets/card_widget.dart';
+import 'package:supabase_database/widgets/custom_button.dart';
 import 'package:supabase_database/widgets/text_input.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
 
   @override
-  State<ListPage> createState() => _ListPageState();
+  State<ListPage> createState() => ListPageState();
 }
 
-class _ListPageState extends State<ListPage> {
+class ListPageState extends State<ListPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController salaryController = TextEditingController();
@@ -20,6 +23,11 @@ class _ListPageState extends State<ListPage> {
     nameController.clear();
     ageController.clear();
     salaryController.clear();
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -35,18 +43,17 @@ class _ListPageState extends State<ListPage> {
               return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    var item = snapshot.data![index];
+                    Student item = snapshot.data![index];
                     return CardWidget(
-                      age: item.age,
-                      id: item.id,
-                      name: item.name,
-                      salary: item.salary,
+                      student: item,
                     );
                   });
             } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(
+                  child: LoadingAnimationWidget.twistingDots(
+                      leftDotColor: Colors.red,
+                      rightDotColor: Colors.blue,
+                      size: 48));
             } else {
               return const Center(
                 child: Text("Error"),
@@ -72,7 +79,7 @@ class _ListPageState extends State<ListPage> {
                         TextInput(
                             controller: salaryController, labelText: "salary"),
                         height24,
-                        ElevatedButton(
+                        CustomButton(
                             onPressed: () async {
                               try {
                                 await Database().insertNewStudent(
@@ -95,15 +102,7 @@ class _ListPageState extends State<ListPage> {
                                 }
                               }
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 10, 67, 180),
-                            ),
-                            child: const Text(
-                              "Insert",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                            ))
+                            text: "insert")
                       ],
                     ),
                   ),

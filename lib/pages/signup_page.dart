@@ -48,6 +48,7 @@ class SignupPageState extends State<SignupPage> {
             TextInput(
               controller: passwordController,
               labelText: "enter password",
+              isPassword: true,
               radiusCircular: 16.0,
             ),
             Row(

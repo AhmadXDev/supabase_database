@@ -10,10 +10,10 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginPage> createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
             TextInput(
               controller: passwordController,
               labelText: "enter password",
+              isPassword: true,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
