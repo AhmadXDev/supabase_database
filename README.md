@@ -36,6 +36,7 @@ showDialog(context: context, builder: (BuildContext dialogContext)
 
 The argument is named dialogContext so it will take the context from the card widgit page isntead of the context passed in the builder and finds the List page in the tree.  
 
+
 After Deleting a Student Card: 
 
 ![image](https://github.com/user-attachments/assets/d49e0d0e-a861-4beb-96d4-8e781c78ae03)
