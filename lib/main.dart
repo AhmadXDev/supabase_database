@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_database/pages/login_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await dotenv.load(fileName: ".env");
   await Supabase.initialize(
-    url: "https://bmtbmmcxkvjhebxtzlrj.supabase.co",
-    anonKey:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtdGJtbWN4a3ZqaGVieHR6bHJqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzNTczNTQsImV4cCI6MjA0OTkzMzM1NH0.4Nl3SlOoEDw8g6pAz0CaqhVv9lUC99l_WdEpXQSCXEY",
+    url: dotenv.env["supabseUrl"]!,
+    anonKey: dotenv.env["supabseKey"]!,
   );
-
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
